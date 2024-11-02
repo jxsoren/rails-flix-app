@@ -1,0 +1,27 @@
+<% @flicks.each do |flick| %>
+  <section class="flick">
+    <div class="image">
+      <%= image_tag flick.image_file_name %>
+    </div>
+    <div class="summary">
+      <h2>
+        <%= link_to flick.title, flick_path(flick) %>
+      </h2>
+      <h3>
+        <%= total_gross(flick) %>
+      </h3>
+      <span class="stars">
+        <%= render "shared/stars", percent: flick.average_stars_as_percent %>
+      </span>
+      <p>
+        <%= truncate(flick.description, length: 150, separator: ' ') %>
+      </p>
+    </div>
+  </section>
+<% end %>
+
+<% if current_user_admin? %>
+  <section class="admin">
+    <%= link_to "Create New Flick", new_flick_path, class: "button" %>
+  </section>
+<% end %>

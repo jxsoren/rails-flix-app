@@ -1,0 +1,33 @@
+<h1>
+  <%= @genre.name %>
+</h1>
+
+<% @flicks_for_genre.each do |flick| %>
+  <section class="flick">
+    <div class="image">
+      <%= image_tag flick.image_file_name %>
+    </div>
+    <div class="summary">
+      <h2>
+        <%= link_to flick.title, flick_path(flick) %>
+      </h2>
+      <h3>
+        <%= total_gross(flick) %>
+      </h3>
+      <span class="stars">
+        <%= render "shared/stars", percent: flick.average_stars_as_percent %>
+      </span>
+      <p>
+        <%= truncate(flick.description, length: 150, separator: ' ') %>
+      </p>
+    </div>
+  </section>
+<% end %>
+
+<% if current_user_admin? %>
+  <div class="admin">
+    <%= link_to "Edit Genre", edit_genre_path(@genre) %>
+    <%= link_to "Delete Genre", genre_path(@genre), data: { turbo_method: :delete } %>
+  </div>
+<% end %>
+

@@ -1,0 +1,46 @@
+<section class="user">
+  <%= profile_image(@user) %>
+
+  <h1>
+    @<%= @user.username %>
+  </h1>
+
+  <p>Since: <%= @user.created_at.strftime("%B %Y") %></p>
+
+  <section id="reviews">
+    <% if @user.reviews.present? %>
+      <h3>Reviews authored by <%= @user.name %>:</h3>
+
+      <% @user.reviews.each do |review| %>
+        <h2>
+          <%= link_to review.flick.title, review.flick %>
+          <%= render "shared/stars", percent: review.stars_as_percent %>
+        </h2>
+        <h2>"<%= review.comment %>"</h2>
+        <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
+      <% end %>
+
+    <% else %>
+      <p> No reviews found :( </p>
+    <% end %>
+  </section>
+
+
+  <% if user_has_access?(@user) %>
+    <div class="actions">
+      <%= link_to "Edit Account", edit_user_path(@user),
+                  class: "button edit"
+      %>
+    </div>
+  <% end %>
+
+  <% if @favorites.present? %>
+    <h3>Favorite Flicks</h3>
+    <div class="favorite-movies">
+      <% @favorites.each do |flick| %>
+        <%= link_to image_tag(flick.image_file_name), flick %>
+      <% end %>
+    </div>
+  <% end %>
+
+</section>

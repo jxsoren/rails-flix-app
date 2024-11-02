@@ -1,0 +1,12 @@
+<h1><%= @review.user.username %>'s Review For <%= link_to @flick.title, @flick %></h1>
+
+<div class="review">
+  <h3>Stars: <%= @review.stars %></h3>
+  <div>
+    <%= render "shared/stars", percent: @review.stars_as_percent %>
+  </div>
+  <p>
+    Comment:
+    <%= @review.comment %>
+  </p>
+</div>

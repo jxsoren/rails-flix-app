@@ -1,0 +1,23 @@
+<h1>Reviews for <%= link_to(@flick.title, flick_path(@flick.id)) %></h1>
+
+<div id="reviews">
+  <% if @reviews.present? %>
+    <section id="reviews">
+      <% @reviews.each do |review| %>
+        <div style="display: flex; gap: 10px">
+          <%= profile_image(review.user, size=40) %>
+          <h3>@<%= link_to review.user.username, review.user %></h3>
+        </div>
+        <h3><%= pluralize(review.stars, 'stars') %></h3>
+        <div>
+          <%= render "shared/stars", percent: review.stars_as_percent %>
+        </div>
+        <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
+        <h2>"<%= review.comment %>"</h2>
+        <br/>
+      <% end %>
+  <% else %>
+    <p> No reviews found :( </p>
+  <% end %>
+  </section>
+</div>
