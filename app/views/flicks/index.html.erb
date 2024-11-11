@@ -1,7 +1,7 @@
 <% @flicks.each do |flick| %>
   <section class="flick">
     <div class="image">
-      <%= image_tag flick.image_file_name %>
+      <%= main_image_tag(flick) %>
     </div>
     <div class="summary">
       <h2>

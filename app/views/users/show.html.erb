@@ -38,7 +38,7 @@
     <h3>Favorite Flicks</h3>
     <div class="favorite-movies">
       <% @favorites.each do |flick| %>
-        <%= link_to image_tag(flick.image_file_name), flick %>
+        <%= link_to main_image_tag(flick), flick %>
       <% end %>
     </div>
   <% end %>

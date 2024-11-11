@@ -1,5 +1,13 @@
 module FlicksHelper
 
+  def main_image_tag(flick)
+    if flick.main_image.attached?
+      image_tag flick.main_image
+    else
+      image_tag "placeholder.png"
+    end
+  end
+
   def total_gross(flick)
     if flick.flop?
       "Flop!"

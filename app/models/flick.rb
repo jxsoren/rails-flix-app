@@ -12,14 +12,13 @@ class Flick < ApplicationRecord
   has_many :characterizations, dependent: :destroy
   has_many :genres, through: :characterizations
 
+  has_one_attached :main_image
+  # validates :acceptable_image
+
   validates :title, presence: true, uniqueness: true
   validates :released_on, :duration, presence: true
   validates :description, length: { minimum: 25 }
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
-  validates :image_file_name, format: {
-    with: /\w+\.(jpg|png)\z/i,
-    message: "must be a JPG or PNG image"
-  }
   validates :rating, inclusion: RATINGS
 
   scope :released, -> { where("released_on <  ?", Time.now).order(released_on: :desc) }
@@ -56,6 +55,21 @@ class Flick < ApplicationRecord
 
   def set_slug
     self.slug = title.parameterize
+  end
+
+  def acceptable_image
+    return unless main_image.attached?
+
+    supported_image_file_types = %w(image/png image/jpeg)
+    max_file_size = 1.megabyte
+
+    unless supported_image_file_types.include?(main_image.blob.content_type)
+      errors.add(:main_image, "file must be one of the following filetypes #{supported_image_file_types}")
+    end
+
+    unless main_image.blob.byte_size <= max_file_size
+      errors.add(:main_image, "file must be less than or equal to #{max_file_size}")
+    end
   end
 
 end

@@ -1,39 +1,39 @@
 <section class="movie-details">
   <div class="details">
     <div class="image">
-      <%= image_tag @flick.image_file_name %>
-
-      <div class="faves">
-        <%= fave_or_unfave(favorite: @favorite, flick: @flick) %>
-        <div class="count">
-          <p> <%= @fans.size %></p>
-        </div>
-      </div>
-
-
+      <%= main_image_tag(@flick) %>
     </div>
-    <h1><%= @flick.title %></h1>
-    <h2>
-      <%= year_of(@flick) %> &bull; <%= @flick.rating %>
-    </h2>
-    <p>
-      <%= @flick.description %>
-    </p>
-    <table>
-      <tr>
-        <th>Director:</th>
-        <td><%= @flick.director %></td>
-      </tr>
-      <tr>
-        <th>Duration:</th>
-        <td><%= @flick.duration %></td>
-      </tr>
-      <tr>
-        <th>Total Gross:</th>
-        <td><%= total_gross(@flick) %></td>
-      </tr>
-    </table>
+
+    <div class="faves">
+      <%= fave_or_unfave(favorite: @favorite, flick: @flick) %>
+      <div class="count">
+        <p> <%= @fans.size %></p>
+      </div>
+    </div>
+
+
   </div>
+  <h1><%= @flick.title %></h1>
+  <h2>
+    <%= year_of(@flick) %> &bull; <%= @flick.rating %>
+  </h2>
+  <p>
+    <%= @flick.description %>
+  </p>
+  <table>
+    <tr>
+      <th>Director:</th>
+      <td><%= @flick.director %></td>
+    </tr>
+    <tr>
+      <th>Duration:</th>
+      <td><%= @flick.duration %></td>
+    </tr>
+    <tr>
+      <th>Total Gross:</th>
+      <td><%= total_gross(@flick) %></td>
+    </tr>
+  </table>
 
   <section class="reviews">
     <%= average_stars(@flick) %>

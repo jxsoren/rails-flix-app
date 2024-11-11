@@ -78,7 +78,7 @@ class FlicksController < ApplicationController
             :released_on,
             :director,
             :duration,
-            :image_file_name,
+            :main_image,
             genre_ids: []
           )
   end
