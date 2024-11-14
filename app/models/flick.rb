@@ -13,7 +13,7 @@ class Flick < ApplicationRecord
   has_many :genres, through: :characterizations
 
   has_one_attached :main_image
-  # validates :acceptable_image
+  validate :acceptable_image
 
   validates :title, presence: true, uniqueness: true
   validates :released_on, :duration, presence: true
